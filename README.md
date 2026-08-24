@@ -1,4 +1,5 @@
-# solabima_2026_poster_template
+# SOLABIMA 2026 Poster Template
+
 Templates para la elaboración de posters para el SOLABIMA 2026
 
 **XIV Congreso de la Sociedad Latinoamericana de Biología Matemática**
