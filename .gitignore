@@ -1,0 +1,16 @@
+# LaTeX build artifacts
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.synctex.gz
+latex/*.fls
+latex/*.fdb_latexmk
+latex/*.toc
+latex/*.pdf
+
+# Preview/export images
+*.png
+!latex/logos/*.png
+
+# macOS
+.DS_Store

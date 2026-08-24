@@ -1,0 +1,219 @@
+% =============================================================
+% Plantilla de poster - SOLABIMA 2026
+% XIV Congreso de la Sociedad Latinoamericana de Biologia Matematica
+% Facultad Politecnica - Universidad Nacional de Asuncion (UNA)
+% San Lorenzo, Paraguay | 5-9 de octubre de 2026
+% =============================================================
+% Tamano por defecto: A0 vertical (841 x 1189 mm).
+% No se publicaron especificaciones oficiales de poster al momento
+% de crear esta plantilla: ajuste \geometry si el comite define un
+% tamano distinto (por ejemplo A0 horizontal).
+% =============================================================
+\documentclass[a0paper,portrait,margin=15mm,innermargin=15mm,
+  blockverticalspace=20mm,colspace=25mm,subcolspace=8mm]{tikzposter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{qrcode}
+
+% -------------------------------------------------------------
+% Paleta de colores SOLABIMA 2026 (provisional, sin identidad
+% grafica oficial publicada). Reemplace estos valores si el
+% comite organizador provee una guia de marca.
+% -------------------------------------------------------------
+\definecolor{solabimaBlue}{HTML}{003B49}   % azul petroleo principal
+\definecolor{solabimaTeal}{HTML}{1B8A8F}   % teal secundario
+\definecolor{solabimaGold}{HTML}{E0A458}   % dorado de acento
+\definecolor{solabimaGrey}{HTML}{F4F4F2}   % gris muy claro (paneles)
+
+\definecolorpalette{solabimaPalette}{
+  \definecolor{colorOne}{HTML}{003B49}
+  \definecolor{colorTwo}{HTML}{1B8A8F}
+  \definecolor{colorThree}{HTML}{E0A458}
+}
+\usecolorpalette{solabimaPalette}
+
+\usetheme{Default}
+\usetitlestyle{Default}
+
+% -------------------------------------------------------------
+% Estilo de bloque: secciones "en caja" (barra de titulo +
+% cuerpo con borde), fondo de pagina blanco, acentos con la
+% paleta SOLABIMA.
+% -------------------------------------------------------------
+\defineblockstyle{SolabimaBox}{
+    titlewidthscale=1, bodywidthscale=1, titleleft,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
+    bodyverticalshift=0pt, roundedcorners=4, linewidth=0.12cm,
+    titleinnersep=0.7cm, bodyinnersep=1cm
+}{
+    \begin{scope}[line width=\blocklinewidth, rounded corners=\blockroundedcorners]
+        \ifBlockHasTitle
+           \draw[color=blocktitlebgcolor, fill=blocktitlebgcolor]
+               (blockbody.south west) rectangle (blocktitle.north east);
+           \draw[color=blocktitlebgcolor, fill=blockbodybgcolor]
+               (blockbody.south west) rectangle (blockbody.north east);
+        \else
+           \draw[color=blocktitlebgcolor, fill=blockbodybgcolor]
+               (blockbody.south west) rectangle (blockbody.north east);
+        \fi
+    \end{scope}
+}
+\useblockstyle{SolabimaBox}
+
+\colorlet{backgroundcolor}{white}
+\colorlet{titlefgcolor}{white}
+\colorlet{titlebgcolor}{solabimaBlue}
+\colorlet{blocktitlebgcolor}{solabimaBlue}
+\colorlet{blocktitlefgcolor}{white}
+\colorlet{blockbodybgcolor}{white}
+\colorlet{blockbodyfgcolor}{black}
+\colorlet{framecolor}{solabimaBlue}
+
+\tikzposterlatexaffectionproofoff
+
+% -------------------------------------------------------------
+% Encabezado: titulo y autores (los logos van al pie del poster)
+% -------------------------------------------------------------
+\title{\parbox{0.9\linewidth}{\centering
+  T\'ITULO DEL TRABAJO EN MAY\'USCULAS\\[2mm]
+  \Large Subt\'itulo opcional}}
+\author{Nombre Apellido$^{1}$, Nombre Apellido$^{2}$, Nombre Apellido$^{1,*}$}
+\institute{
+  $^{1}$Facultad Polit\'ecnica, Universidad Nacional de Asunci\'on (FPUNA), Paraguay \quad
+  $^{2}$Instituci\'on / Departamento \\
+  $^{*}$Autor de correspondencia: \texttt{correo@ejemplo.py}
+}
+
+\begin{document}
+
+\maketitle[titletotopverticalspace=6mm,titletoblockverticalspace=15mm]
+
+% -------------------------------------------------------------
+% Cuerpo del poster: 2 columnas, secciones en caja
+% -------------------------------------------------------------
+\begin{columns}
+
+  % ---------------- Columna 1 ----------------
+  \column{0.48}
+
+  \block{Motivaci\'on / Introducci\'on}{
+    Presente aqu\'i el contexto y la motivaci\'on del trabajo:
+    el problema abordado, su relevancia dentro de la biolog\'ia
+    matem\'atica y los antecedentes m\'as importantes.
+
+    \vspace{4mm}
+    \begin{itemize}
+      \setlength\itemsep{2mm}
+      \item Antecedente o dato relevante 1.
+      \item Antecedente o dato relevante 2.
+      \item Vac\'io de conocimiento que motiva este trabajo.
+    \end{itemize}
+  }
+
+  \block{Objetivos}{
+    \begin{itemize}
+      \setlength\itemsep{2mm}
+      \item Objetivo general del trabajo.
+      \item Objetivo espec\'ifico 1.
+      \item Objetivo espec\'ifico 2.
+    \end{itemize}
+  }
+
+  \block{Metodolog\'ia}{
+    Describa el enfoque, modelo matem\'atico, datos y/o
+    algoritmos utilizados.
+
+    \vspace{4mm}
+    \begin{itemize}
+      \setlength\itemsep{2mm}
+      \item Dise\~no del estudio / modelo propuesto.
+      \item Fuentes de datos o par\'ametros.
+      \item Herramientas y m\'etodos de an\'alisis.
+    \end{itemize}
+
+    \vspace{4mm}
+    \begin{tikzfigure}[Ecuaci\'on o esquema del modelo]
+      \begin{tikzpicture}
+        \node[draw, dashed, minimum width=17cm, minimum height=6cm,
+              text width=15cm, align=center]
+              {Espacio para ecuaci\'on, diagrama de flujo\\
+               o esquema del modelo};
+      \end{tikzpicture}
+    \end{tikzfigure}
+  }
+
+  % ---------------- Columna 2 ----------------
+  \column{0.48}
+
+  \block{Resultados}{
+    Presente los resultados principales, apoyados en figuras
+    y/o tablas.
+
+    \vspace{4mm}
+    \begin{tikzfigure}[Figura 1. Descripci\'on breve del resultado.]
+      \begin{tikzpicture}
+        \node[draw, dashed, minimum width=17cm, minimum height=10cm,
+              text width=15cm, align=center]
+              {Espacio para figura principal\\ (gr\'afico, mapa, simulaci\'on, etc.)};
+      \end{tikzpicture}
+    \end{tikzfigure}
+
+    \vspace{4mm}
+    \begin{tikzfigure}[Tabla 1. Descripci\'on breve de la tabla.]
+      \begin{tabular}{lccc}
+        \toprule
+        Par\'ametro & Valor & IC 95\% & $p$ \\
+        \midrule
+        Par\'ametro 1 & 0.00 & (0.00, 0.00) & 0.00 \\
+        Par\'ametro 2 & 0.00 & (0.00, 0.00) & 0.00 \\
+        Par\'ametro 3 & 0.00 & (0.00, 0.00) & 0.00 \\
+        \bottomrule
+      \end{tabular}
+    \end{tikzfigure}
+  }
+
+  \block{Referencias}{
+    \begin{minipage}[t]{0.66\linewidth}
+      {\footnotesize
+      [1] Apellido, N. (A\~no). T\'itulo del art\'iculo. \textit{Revista}, vol(n\'um), p\'aginas.\\[2mm]
+      [2] Apellido, N. \& Apellido, N. (A\~no). T\'itulo del art\'iculo. \textit{Revista}, vol(n\'um), p\'aginas.
+      }
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.28\linewidth}
+      \centering
+      \qrcode[height=2.6cm]{https://www.solabima2026.pol.una.py}\\
+      {\footnotesize Escanee para m\'as informaci\'on}
+    \end{minipage}
+  }
+
+  \block{Agradecimientos}{
+    Financiamiento, instituci\'on o colegas a reconocer.
+  }
+
+\end{columns}
+
+% -------------------------------------------------------------
+% Pie de poster: logos institucionales
+% -------------------------------------------------------------
+\begin{columns}
+  \column{1}
+  \block[bodyinnersep=1.2cm]{}{
+    \begin{center}
+      {\small\color{solabimaBlue}\textsc{Instituciones organizadoras y auspiciantes}}\\[6mm]
+      \includegraphics[height=3cm]{logos/logo_solabima.png}\hspace{10mm}%
+      \includegraphics[height=3cm]{logos/logo_una.jpg}\hspace{10mm}%
+      \includegraphics[height=3cm]{logos/logo_fpuna.pdf}\hspace{10mm}%
+      \includegraphics[height=3cm]{logos/logo_arasy.png}\hspace{10mm}%
+      \includegraphics[height=3cm]{logos/logo_custom1.png}\hspace{10mm}%
+      \includegraphics[height=3cm]{logos/logo_custom2.png}%
+    \end{center}
+  }
+\end{columns}
+
+\end{document}
