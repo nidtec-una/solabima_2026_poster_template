@@ -21,10 +21,6 @@ Nota: también debería ser posible compilar el proyecto en forma local con cual
 
 Simplemente ingresa a la carpeta `pptx`, descarga el archivo `solabima2026_poster_template.pptx`, abre PowerPoint y edita el template.
 
-### Keynote
-
-Para usuarios Mac: descarga el archivo `.pptx` de la carpeta `pptx`, ábrelo directamente en Keynote (Archivo > Abrir) y guárdalo como `.key` (Archivo > Guardar como) para editarlo de forma nativa.
-
 ## Indicaciones
 
 * El tamaño de página es A0. Es responsabilidad de los presentadores traer sus posters **impresos**.

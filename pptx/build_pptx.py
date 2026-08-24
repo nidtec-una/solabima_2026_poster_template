@@ -4,7 +4,7 @@ Generates solabima2026_poster_template.pptx: an A0 portrait poster
 (841 x 1189 mm) matching the layout and color palette of the LaTeX
 template in ../latex — two columns, boxed sections, logos in a
 footer band. Edit this script and re-run it to regenerate the file,
-or just edit the .pptx directly in PowerPoint / Keynote.
+or just edit the .pptx directly in PowerPoint.
 
 Run:  python3 build_pptx.py
 """
