@@ -43,19 +43,20 @@
 \normalsize
 
 % -------------------------------------------------------------
-% Paleta de colores SOLABIMA 2026 (provisional, sin identidad
-% grafica oficial publicada). Reemplace estos valores si el
-% comite organizador provee una guia de marca.
+% Paleta de colores SOLABIMA 2026, extraida del logo oficial del
+% congreso (logos/logo_solabima.png: azul y naranja). Reemplace
+% estos valores si el comite organizador provee una guia de marca
+% mas completa.
 % -------------------------------------------------------------
-\definecolor{solabimaBlue}{HTML}{003B49}   % azul petroleo principal
-\definecolor{solabimaTeal}{HTML}{1B8A8F}   % teal secundario
-\definecolor{solabimaGold}{HTML}{E0A458}   % dorado de acento
-\definecolor{solabimaGrey}{HTML}{F4F4F2}   % gris muy claro (paneles)
+\definecolor{solabimaBlue}{HTML}{1C6EA8}    % azul principal (logo)
+\definecolor{solabimaBlueDark}{HTML}{0F4B73} % azul oscuro (acentos)
+\definecolor{solabimaOrange}{HTML}{F19651}  % naranja principal (logo)
+\definecolor{solabimaGrey}{HTML}{F4F4F2}    % gris muy claro (paneles)
 
 \definecolorpalette{solabimaPalette}{
-  \definecolor{colorOne}{HTML}{003B49}
-  \definecolor{colorTwo}{HTML}{1B8A8F}
-  \definecolor{colorThree}{HTML}{E0A458}
+  \definecolor{colorOne}{HTML}{1C6EA8}
+  \definecolor{colorTwo}{HTML}{0F4B73}
+  \definecolor{colorThree}{HTML}{F19651}
 }
 \usecolorpalette{solabimaPalette}
 
@@ -150,6 +151,10 @@
 \colorlet{blocktitlefgcolor}{white}
 \colorlet{blockbodybgcolor}{white}
 \colorlet{blockbodyfgcolor}{black}
+
+% Vinetas de las listas en naranja (acento del logo), para combinar
+% con el azul principal de las barras de titulo.
+\renewcommand{\labelitemi}{\textcolor{solabimaOrange}{\textbullet}}
 
 \tikzposterlatexaffectionproofoff
 
@@ -249,7 +254,7 @@
     \end{itemize}
 
     \vspace{2mm}
-    \begin{tikzfigure}[Ejemplo: modelo SIR de din\'amica epid\'emica]
+    \begin{tikzfigure}[\textcolor{solabimaOrange}{Ejemplo:} modelo SIR de din\'amica epid\'emica]
       \begin{align*}
         \frac{dS}{dt} &= -\,\beta \, \frac{S I}{N} \\[1pt]
         \frac{dI}{dt} &= \beta \, \frac{S I}{N} \;-\; \gamma I \\[1pt]
@@ -271,7 +276,7 @@
     ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
 
     \vspace{4mm}
-    \begin{tikzfigure}[Figura: Descripci\'on breve del resultado.]
+    \begin{tikzfigure}[\textcolor{solabimaOrange}{Figura:} Descripci\'on breve del resultado.]
       \begin{tikzpicture}
         \node[draw, dashed, minimum width=17cm, minimum height=10cm,
               text width=15cm, align=center]
@@ -283,7 +288,7 @@
     % El pie de tabla va arriba (convencion habitual), a diferencia
     % del pie de figura, que va abajo.
     \begin{center}
-      {\small\bfseries Tabla: Descripci\'on breve de la tabla.}\\[6pt]
+      {\small\bfseries \textcolor{solabimaOrange}{Tabla:} Descripci\'on breve de la tabla.}\\[6pt]
       \begin{tabular}{lccc}
         \toprule
         Par\'ametro & Valor & IC 95\% & $p$ \\
