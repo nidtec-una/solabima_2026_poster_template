@@ -3,14 +3,13 @@
 logo_solabima.png, logo_una.jpg and logo_fpuna.pdf are the real official
 logos (downloaded from solabima2026.pol.una.py / provided by the user) -
 do not overwrite them with this script. This only (re)generates the
-remaining placeholders: ARASY (no official logo available yet) and two
-generic "custom" slots for sponsor/collaborator logos. Run
+remaining placeholders: two generic "custom" slots for sponsor or
+collaborator logos (e.g. ARASY) in the footer band. Run
 `python3 make_placeholders.py` to regenerate them if needed.
 """
 from PIL import Image, ImageDraw, ImageFont
 
 LOGOS = [
-    ("logo_arasy", "ARASY"),
     ("logo_custom1", "LOGO"),
     ("logo_custom2", "LOGO"),
 ]
