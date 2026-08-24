@@ -17,6 +17,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{booktabs}
+\usepackage{colortbl}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usetikzlibrary{calc}
@@ -151,6 +152,16 @@
 \colorlet{blocktitlefgcolor}{white}
 \colorlet{blockbodybgcolor}{white}
 \colorlet{blockbodyfgcolor}{black}
+% Borde del titulo del poster (Default titlestyle) en naranja, como
+% unico acento de color en el encabezado.
+\colorlet{framecolor}{solabimaOrange}
+
+% Los titulos de bloque de tikzposter usan el comando clasico \bf
+% internamente (no \bfseries): lo redefinimos para que ademas cambie
+% a la familia sans-serif (Latin Modern Sans, via lmodern), dando
+% contraste tipografico frente al cuerpo en serif. Este comando no se
+% usa en ningun otro lugar de esta plantilla.
+\renewcommand{\bf}{\sffamily\bfseries}
 
 % Vinetas de las listas en naranja (acento del logo), para combinar
 % con el azul principal de las barras de titulo.
@@ -278,7 +289,8 @@
     \vspace{4mm}
     \begin{tikzfigure}[\textcolor{solabimaOrange}{Figura:} Descripci\'on breve del resultado.]
       \begin{tikzpicture}
-        \node[draw, dashed, minimum width=17cm, minimum height=10cm,
+        \node[draw, dashed, color=solabimaBlue, fill=solabimaBlue!5,
+              minimum width=17cm, minimum height=10cm,
               text width=15cm, align=center]
               {Espacio para figura principal\\ (gr\'afico, mapa, simulaci\'on, etc.)};
       \end{tikzpicture}
@@ -291,7 +303,8 @@
       {\small\bfseries \textcolor{solabimaOrange}{Tabla:} Descripci\'on breve de la tabla.}\\[6pt]
       \begin{tabular}{lccc}
         \toprule
-        Par\'ametro & Valor & IC 95\% & $p$ \\
+        \rowcolor{solabimaBlue!8}
+        \bfseries Par\'ametro & \bfseries Valor & \bfseries IC 95\% & \bfseries $p$ \\
         \midrule
         Par\'ametro 1 & 3.14 & (3.10, 3.18) & 0.001 \\
         Par\'ametro 2 & 2.72 & (2.68, 2.76) & 0.007 \\
