@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="latex/logos/logo_solabima.png" width="220" alt="SOLABIMA 2026">
+</p>
+
 # SOLABIMA 2026 Poster Template
 
 Templates para la elaboración de posters para el SOLABIMA 2026
