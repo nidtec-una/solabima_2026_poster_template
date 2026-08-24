@@ -17,10 +17,28 @@ Facultad Politécnica, Universidad Nacional de Asunción (UNA), Paraguay
 - [`keynote/`](keynote/) — instrucciones para obtener la versión Keynote
   a partir del `.pptx`.
 
-Ningún formato oficial de póster (tamaño, logos, colores institucionales)
-estaba publicado por el comité organizador al momento de crear estas
-plantillas; usan A0 vertical y una paleta provisional como valores por
-defecto. Los logos oficiales de SOLABIMA 2026, UNA y Facultad
-Politécnica ya estan en `latex/logos/`; los dos logos genéricos
-restantes son para auspiciantes/colaboradores adicionales. Ajuste
-tamaño/colores si el comité publica una guía de marca.
+Los logos oficiales de SOLABIMA 2026, UNA y Facultad Politécnica ya
+están en `latex/logos/`; los dos logos genéricos restantes son para
+auspiciantes/colaboradores adicionales. Los colores usados son una
+paleta extraída del logo oficial del congreso, no una guía de marca
+publicada por el comité — ajústela si en algún momento se publica una
+oficial.
+
+## Guía para autores
+
+1. **Tamaño**: el tamaño de página es A0. La impresión del póster es
+   responsabilidad de cada autor/a.
+2. **Idioma**: el póster puede redactarse en español, inglés o
+   portugués.
+3. **Secciones**: las secciones incluidas (Motivación/Introducción,
+   Objetivos, Metodología, Resultados, Referencias, Agradecimientos,
+   etc.) son solo una guía orientativa — siéntase libre de adaptarlas,
+   renombrarlas, reordenarlas o quitarlas según lo que necesite su
+   trabajo.
+4. **No mover la caja de título ni la de logos**: no cambie la
+   posición de la caja de título ni la de la franja de logos
+   institucionales al pie del póster.
+5. **Logos**: los primeros tres logos (de izquierda a derecha) no
+   deben modificarse ni reordenarse. Puede agregar logos adicionales
+   a la derecha del tercero; al hacerlo, asegúrese de que queden
+   centrados y de que quepan dentro de la caja.
