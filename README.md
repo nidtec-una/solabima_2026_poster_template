@@ -26,8 +26,8 @@ Simplemente ingresa a la carpeta `pptx`, descarga el archivo `solabima2026_poste
 * El tamaño de página es A0. Es responsabilidad de los presentadores traer sus posters **impresos**.
 * El poster puede redactarse en español, inglés o portugués.
 * Las secciones incluidas en los templates son solo una guía orientativa; siéntase libre de adaptarlas según su trabajo.
-* No modifique la posición de la caja de título ni la de la franja de logos.
-* Los primeros tres logos (de izquierda a derecha) no deben modificarse. Puede agregar logos adicionales a la derecha del tercero, centrados y dentro de la caja.
+* No modifique la posición ni el tamaño del bloque de título (encabezado) ni la de los dos logos que lo flanquean.
+* La franja de logos al pie es opcional y de uso libre: puede agregar ahí los logos de auspiciantes o entidades financiadoras, información adicional, un código QR, o eliminarla por completo si no la necesita.
 
 ## Problemas
 

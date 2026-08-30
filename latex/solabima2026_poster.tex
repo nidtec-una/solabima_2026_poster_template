@@ -3,6 +3,14 @@
 % XIV Congreso de la Sociedad Latinoamericana de Biologia Matematica
 % Facultad Politecnica - Universidad Nacional de Asuncion (UNA)
 % San Lorenzo, Paraguay | 5-9 de octubre de 2026
+% -------------------------------------------------------------
+% Encabezado sin caja de fondo: titulo/autores/afiliacion en azul,
+% directamente sobre el fondo blanco, acotados al 70% del ancho y
+% flanqueados por el logo de SOLABIMA (izquierda) y un logo
+% placeholder (derecha). La franja de logos institucionales al pie
+% es opcional (interruptor \ifSolabimaFundingLogos) y sirve para
+% logos de auspiciantes/financiamiento (ver nota junto a ese
+% bloque, al final del archivo).
 % =============================================================
 % Tamano por defecto: A0 vertical (841 x 1189 mm).
 % No se publicaron especificaciones oficiales de poster al momento
@@ -10,7 +18,7 @@
 % tamano distinto (por ejemplo A0 horizontal).
 % =============================================================
 \documentclass[a0paper,portrait,margin=15mm,innermargin=15mm,
-  blockverticalspace=20mm,colspace=25mm,subcolspace=8mm]{tikzposter}
+  blockverticalspace=15mm,colspace=25mm,subcolspace=8mm]{tikzposter}
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-noindentfirst]{babel}
@@ -20,6 +28,7 @@
 \usepackage{colortbl}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{pdfrender}
 \usetikzlibrary{calc}
 
 % -------------------------------------------------------------
@@ -52,6 +61,8 @@
 \definecolor{solabimaBlue}{HTML}{1C6EA8}    % azul principal (logo)
 \definecolor{solabimaBlueDark}{HTML}{0F4B73} % azul oscuro (acentos)
 \definecolor{solabimaOrange}{HTML}{F19651}  % naranja principal (logo)
+\definecolor{solabimaOrangeDark}{HTML}{C2661F} % naranja oscuro (subtitulo)
+\definecolor{solabimaDarkGray}{HTML}{333333} % gris oscuro (autores/afiliacion)
 \definecolor{solabimaGrey}{HTML}{F4F4F2}    % gris muy claro (paneles)
 
 \definecolorpalette{solabimaPalette}{
@@ -62,28 +73,39 @@
 \usecolorpalette{solabimaPalette}
 
 \usetheme{Default}
+
+% -------------------------------------------------------------
+% Estilo de titulo "sin caja": reutiliza el estilo "Default" de
+% tikzposter (el mismo mecanismo probado en la v1) pero con
+% titlebgcolor y framecolor en blanco, para que el rectangulo de
+% fondo se vuelva invisible sobre la pagina (tambien blanca). El
+% titulo, subtitulo, autores y afiliacion se muestran directamente
+% sobre el fondo blanco del poster, en azul (ver colorlet de
+% titlefgcolor mas abajo).
+% -------------------------------------------------------------
 \makeatletter
-\usetitlestyle[titletextscale=1.2, width=\TP@visibletextwidth]{Default}
+\usetitlestyle[titletextscale=1.55, width=\TP@visibletextwidth]{Default}
 \makeatother
 
 % -------------------------------------------------------------
-% Mas espacio entre el titulo, los autores y la afiliacion (por
-% defecto tikzposter deja solo \vspace*{1em} entre cada uno).
+% Encabezado: bloque de titulo centrado, acotado al 70% del ancho
+% visible (un unico \minipage centrado -- NO varias minipages con
+% \hfill: eso rompe la medicion de altura de tikzposter, ver nota
+% de \TP@titleheight mas abajo). Los logos van como nodos TikZ
+% aparte, posicionados despues de \maketitle usando la altura de
+% titulo ya medida por tikzposter para centrarlos verticalmente.
 % -------------------------------------------------------------
 \makeatletter
 \renewcommand{\TP@maketitle}{
     \centering
-    \vbox{
-    \@titlegraphic
-        \\[\TP@titlegraphictotitledistance]
-        \centering
-        \color{titlefgcolor}
-        {\sffamily\bfseries \Huge \@title \par}
-        \vspace*{2.5em}
-        {\Large \@author \par}
-        \vspace*{2em}
-        {\large \@institute}
-    }
+    \begin{minipage}{0.70\linewidth}
+      \centering
+      {\sffamily\bfseries \Huge \@title \par}
+      \vspace*{1.5em}
+      {\color{solabimaDarkGray}\Large \@author \par}
+      \vspace*{1em}
+      {\color{solabimaDarkGray}\large \@institute}
+    \end{minipage}
 }
 \makeatother
 
@@ -95,6 +117,10 @@
 % recto (ver \SolabimaR para el radio).
 % -------------------------------------------------------------
 \def\SolabimaR{20pt}
+
+% Interruptor para la franja opcional de logos de auspiciantes al
+% pie del poster (ver mas abajo, justo antes de \end{document}).
+\newif\ifSolabimaFundingLogos
 \defineblockstyle{SolabimaBox}{
     titlewidthscale=1, bodywidthscale=1, titleleft,
     titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0pt, bodyoffsety=0pt,
@@ -109,7 +135,7 @@
            % de mas abajo, para que ambos trazos coincidan
            % exactamente y no asome una esquina recta detras del
            % redondeo.
-           \draw[color=blocktitlebgcolor, fill=blocktitlebgcolor]
+           \draw[color=blockbordercolor, fill=blocktitlebgcolor]
              ($(blocktitle.north west)+(\SolabimaR,0)$)
              -- (blocktitle.north east)
              -- ($(blockbody.south east)+(0,\SolabimaR)$)
@@ -120,7 +146,7 @@
              -- cycle;
            % Relleno del cuerpo: redondea solo la esquina
            % inferior derecha.
-           \draw[color=blocktitlebgcolor, fill=blockbodybgcolor]
+           \draw[color=blockbordercolor, fill=blockbodybgcolor]
              (blockbody.south west)
              -- ($(blockbody.south east)+(-\SolabimaR,0)$)
              arc[start angle=-90, end angle=0, radius=\SolabimaR]
@@ -131,7 +157,7 @@
            % Sin titulo (p.ej. franja de logos): un solo
            % rectangulo, redondea superior izquierda e inferior
            % derecha.
-           \draw[color=blocktitlebgcolor, fill=blockbodybgcolor]
+           \draw[color=blockbordercolor, fill=blockbodybgcolor]
              ($(blockbody.north west)+(\SolabimaR,0)$)
              -- (blockbody.north east)
              -- ($(blockbody.south east)+(0,\SolabimaR)$)
@@ -146,15 +172,22 @@
 \useblockstyle{SolabimaBox}
 
 \colorlet{backgroundcolor}{white}
-\colorlet{titlefgcolor}{white}
-\colorlet{titlebgcolor}{solabimaBlue}
-\colorlet{blocktitlebgcolor}{solabimaBlue}
-\colorlet{blocktitlefgcolor}{white}
+% Sin caja de titulo: titlebgcolor/framecolor en blanco vuelven
+% invisible el rectangulo de fondo del titulo (mismo mecanismo de
+% la v1, solo que "apagado" por color en vez de reemplazado). El
+% texto del encabezado se pinta directamente en azul.
+\colorlet{titlebgcolor}{white}
+\colorlet{framecolor}{white}
+\colorlet{titlefgcolor}{solabimaBlue}
+% Cajas de seccion: borde en naranja pastel (mezcla con blanco --
+% el naranja oscuro se sentia demasiado fuerte para un borde),
+% fondo blanco (tanto la barra de titulo como el cuerpo), texto
+% del titulo en azul.
+\colorlet{blockbordercolor}{solabimaOrange!55!white}
+\colorlet{blocktitlebgcolor}{white}
+\colorlet{blocktitlefgcolor}{solabimaBlue}
 \colorlet{blockbodybgcolor}{white}
 \colorlet{blockbodyfgcolor}{black}
-% Borde del titulo del poster (Default titlestyle) en naranja, como
-% unico acento de color en el encabezado.
-\colorlet{framecolor}{solabimaOrange}
 
 % Los titulos de bloque de tikzposter usan el comando clasico \bf
 % internamente (no \bfseries): lo redefinimos para que ademas cambie
@@ -189,11 +222,27 @@
 \makeatother
 
 % -------------------------------------------------------------
-% Encabezado: titulo y autores (los logos van al pie del poster)
+% Encabezado: logo SOLABIMA + titulo/autores + logo placeholder,
+% sin caja de fondo (ver \TP@maketitle mas arriba). El ancho del
+% bloque de titulo ya queda limitado al 70% del ancho visible por
+% la minipage en \TP@maketitle. El \parbox aqui SIGUE siendo
+% necesario aunque parezca redundante: \title{} internamente hace
+% \scalebox{...}{#1} (por titletextscale), y \scalebox necesita
+% que su contenido sea una caja -- un \\ suelto en texto plano
+% dentro de \scalebox rompe la compilacion (modo horizontal
+% restringido). \linewidth aqui se resuelve en el momento en que
+% \TP@maketitle invoca \@title, es decir dentro de la minipage de
+% arriba, asi que coincide con ese 70%.
 % -------------------------------------------------------------
-\title{\parbox{0.9\linewidth}{\centering
-  T\'ITULO DEL TRABAJO EN MAY\'USCULAS\\[2mm]
-  \Large Subt\'itulo opcional}}
+% El titulo usa pdfrender (relleno+trazo) para verse mas "bold" que
+% \bfseries solo -- Latin Modern Sans no tiene un peso mas grueso
+% que "bold" disponible por defecto en pdflatex. Ajuste LineWidth
+% para mas/menos grosor (valores tipicos: 0.5-1.5pt a este tamano).
+\title{\parbox{\linewidth}{\centering
+  \textpdfrender{TextRenderingMode=FillStroke, LineWidth=.9pt,
+    FillColor=solabimaBlue, StrokeColor=solabimaBlue}%
+    {T\'ITULO DEL TRABAJO EN MAY\'USCULAS}\\[2mm]
+  {\Large\color{solabimaOrangeDark}Subt\'itulo opcional}}}
 \author{Nombre Apellido$^{1}$, Nombre Apellido$^{2}$, Nombre Apellido$^{1,*}$}
 \institute{
   $^{1}$Facultad de Ciencias Imaginarias, Universidad de Alg\'un Lugar, Pa\'is \\
@@ -204,6 +253,24 @@
 \begin{document}
 
 \maketitle[titletotopverticalspace=12mm,titletoblockverticalspace=20mm]
+
+% -------------------------------------------------------------
+% Logos del encabezado, simetricos a los lados del bloque de
+% titulo. Se posicionan aparte (no dentro de \TP@maketitle) y se
+% centran verticalmente usando \TP@titleheight, que tikzposter ya
+% calculo al medir el titulo en \maketitle. Reemplace
+% logo_header_right.png por el logo real que corresponda.
+% -------------------------------------------------------------
+\makeatletter
+\node[anchor=center] at
+  (-0.5\TP@visibletextwidth+7cm,
+   0.5\textheight-\TP@titletotopverticalspace-0.5\TP@titleheight)
+  {\includegraphics[height=13cm]{logos/logo_solabima_badge.png}};
+\node[anchor=center] at
+  (0.5\TP@visibletextwidth-7cm,
+   0.5\textheight-\TP@titletotopverticalspace-0.5\TP@titleheight)
+  {\includegraphics[height=8.5cm]{logos/logo_header_right.png}};
+\makeatother
 
 % -------------------------------------------------------------
 % Cuerpo del poster: 2 columnas, secciones en caja
@@ -325,6 +392,15 @@
     \end{itemize}
   }
 
+  \block{Conclusiones}{
+    \begin{itemize}
+      \setlength\itemsep{2mm}
+      \item Conclusi\'on principal 1.
+      \item Conclusi\'on principal 2.
+      \item Proyecciones o trabajo futuro.
+    \end{itemize}
+  }
+
   \block{Referencias}{
     {\footnotesize
     [1] Apellido, N. (A\~no). T\'itulo del art\'iculo. \textit{Revista}, vol(n\'um), p\'aginas.\\[2mm]
@@ -337,39 +413,44 @@
   \block{Agradecimientos}{
     {\small
     Financiamiento, instituci\'on o colegas a reconocer.
-
-    \vspace{3mm}
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat.
     }
   }
 
 \end{columns}
 
 % -------------------------------------------------------------
-% Pie de poster: logos institucionales, anclado cerca del borde
-% inferior de la pagina (no depende de cuanto ocupen las dos
-% columnas de contenido de arriba). Si el contenido de las
-% columnas crece demasiado podria superponerse con esta franja;
-% ajuste el valor "+10.4cm" de abajo (o el contenido de arriba) si
-% eso ocurre.
+% Pie de poster (OPCIONAL): espacio para logos de auspiciantes o
+% agencias de financiamiento, anclado cerca del borde inferior de
+% la pagina (no depende de cuanto ocupen las dos columnas de
+% contenido de arriba). Si el contenido de las columnas crece
+% demasiado podria superponerse con esta franja; ajuste el valor
+% "+9.3cm" de abajo (o el contenido de arriba) si eso ocurre.
+%
+% Para quitar esta franja por completo (si no hay auspiciantes que
+% reconocer), cambie \SolabimaFundingLogostrue por
+% \SolabimaFundingLogosfalse abajo, o simplemente borre este bloque
+% entero junto con el \makeatletter/\makeatother que lo precede.
 % -------------------------------------------------------------
-\makeatletter
-\setlength{\TP@blocktop}{-0.5\textheight+\TP@innermargin+10.4cm}
-\global\TP@blocktop=\TP@blocktop
-\makeatother
+\SolabimaFundingLogostrue
+\ifSolabimaFundingLogos
+  \makeatletter
+  \setlength{\TP@blocktop}{-0.5\textheight+\TP@innermargin+9.3cm}
+  \global\TP@blocktop=\TP@blocktop
+  \makeatother
 
-\begin{columns}
-  \column{1}
-  \block[bodyinnersep=1.5cm]{}{
-    \begin{center}
-      \includegraphics[height=7cm]{logos/logo_solabima.png}\hspace{15mm}%
-      \includegraphics[height=7cm]{logos/logo_una.jpg}\hspace{15mm}%
-      \includegraphics[height=7cm]{logos/logo_fpuna.pdf}\hspace{15mm}%
-      \includegraphics[height=7cm]{logos/logo_custom1.png}\hspace{15mm}%
-      \includegraphics[height=7cm]{logos/logo_custom2.png}%
-    \end{center}
-  }
-\end{columns}
+  \begin{columns}
+    \column{1}
+    \block[bodyinnersep=1cm]{}{
+      \begin{center}
+        {\small\itshape\color{solabimaDarkGray}
+        Esta franja es opcional: puede usarla para agregar mas
+        logos, informacion adicional, un c\'odigo QR, etc., o
+        eliminarla por completo si no la necesita.}\\[4mm]
+        \includegraphics[height=5.5cm]{logos/logo_custom1.png}\hspace{12mm}%
+        \includegraphics[height=5.5cm]{logos/logo_custom2.png}%
+      \end{center}
+    }
+  \end{columns}
+\fi
 
 \end{document}

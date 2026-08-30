@@ -1,0 +1,19 @@
+% Source for equation_sir.png, matching the equation example in
+% ../../latex/solabima2026_poster.tex. python-pptx can't typeset
+% math, so this is rendered once with LaTeX and embedded as an image.
+%
+% Regenerate with:
+%   pdflatex equation_sir.tex
+%   pdftoppm -png -r 600 equation_sir.pdf equation_sir
+%   mv equation_sir-1.png equation_sir.png
+\documentclass[preview,border=4pt]{standalone}
+\usepackage{amsmath}
+\usepackage{lmodern}
+\begin{document}
+\Large
+\begin{align*}
+  \frac{dS}{dt} &= -\,\beta \, \frac{S I}{N} \\[6pt]
+  \frac{dI}{dt} &= \beta \, \frac{S I}{N} \;-\; \gamma I \\[6pt]
+  \frac{dR}{dt} &= \gamma I
+\end{align*}
+\end{document}

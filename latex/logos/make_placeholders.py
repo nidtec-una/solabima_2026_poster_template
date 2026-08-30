@@ -1,15 +1,16 @@
 """Generate simple placeholder logo images.
 
-logo_solabima.png, logo_una.jpg and logo_fpuna.pdf are the real official
-logos (downloaded from solabima2026.pol.una.py / provided by the user) -
-do not overwrite them with this script. This only (re)generates the
-remaining placeholders: two generic "custom" slots for sponsor or
-collaborator logos (e.g. ARASY) in the footer band. Run
+logo_solabima.png is the real official logo (downloaded from
+solabima2026.pol.una.py) - do not overwrite it with this script. This
+only (re)generates the generic placeholders: logo_header_right (the
+logo slot next to the title, opposite SOLABIMA) and two "custom"
+slots for funding-agency logos in the optional footer band. Run
 `python3 make_placeholders.py` to regenerate them if needed.
 """
 from PIL import Image, ImageDraw, ImageFont
 
 LOGOS = [
+    ("logo_header_right", "Logo de\ntu Uni"),
     ("logo_custom1", "LOGO"),
     ("logo_custom2", "LOGO"),
 ]
